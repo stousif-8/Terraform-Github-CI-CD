@@ -3,8 +3,8 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name = "Deployed-rg"
-  location = "West India"
+  name = "pre-production-rg"
+  location = "East US"
 }
 
 resource "azurerm_app_service_plan" "example" {
@@ -12,7 +12,7 @@ resource "azurerm_app_service_plan" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   sku {
-    tier = "Free"
-    size = "F1"
+    tier = "Basic"
+    size = "B1"
   }
 }
