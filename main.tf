@@ -3,8 +3,8 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name = "testing-rg"
-  location = "Central India"
+  name = "Deployed-rg"
+  location = "West India"
 }
 
 resource "azurerm_app_service_plan" "example" {
@@ -13,6 +13,6 @@ resource "azurerm_app_service_plan" "example" {
   resource_group_name = azurerm_resource_group.example.name
   sku {
     tier = "Free"
-    size = "B1"
+    size = "F1"
   }
 }
