@@ -3,7 +3,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "testing-rg"
+  name     = "devops-rg"
   location = "Canada Central"
 }
 
