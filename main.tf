@@ -3,8 +3,8 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name = "pre-production-rg"
-  location = "East US"
+  name     = "testing-rg"
+  location = "Canada Central"
 }
 
 resource "azurerm_app_service_plan" "example" {
@@ -12,17 +12,18 @@ resource "azurerm_app_service_plan" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   sku {
-    tier = "Basic"
-    size = "B1"
+    tier = "PremiumV3"
+    size = "P0v3"
   }
 }
+
 resource "azurerm_app_service" "example" {
-  name                = "deployment-app"
+  name                = "example-appservice"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   app_service_plan_id = azurerm_app_service_plan.example.id
 
   site_config {
-    linux_fx_version = "NODE|16"
+    # Add relevant site configurations here, e.g., stack settings
   }
 }
