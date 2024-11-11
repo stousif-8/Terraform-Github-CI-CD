@@ -3,23 +3,23 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "azure-terraform-rg"
+  name     = "resourceazures-rg"
   location = "Canada Central"
 }
 
 resource "azurerm_service_plan" "example" {
-  name                = "example-appserviceplan"
+  name                = "example"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   os_type             = "Linux"    # Required field for OS type
-  sku_name            = "P1v3"     # Required SKU name
+  sku_name            = "P1v2"     # Required SKU name
 }
 
-resource "azurerm_app_service" "example" {
-  name                = "example-appsservice" # Unique name
-  location            = azurerm_resource_group.example.location
+resource "azurerm_linux_web_app" "example" {
+  name                = "example"
   resource_group_name = azurerm_resource_group.example.name
-  app_service_plan_id = azurerm_service_plan.example.id              # Correct reference to service plan
+  location            = azurerm_service_plan.example.location
+  service_plan_id     = azurerm_service_plan.example.id
 
   site_config {
     linux_fx_version = "NODE|18"
