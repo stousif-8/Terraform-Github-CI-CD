@@ -17,6 +17,11 @@ jobs:
         with:
           terraform_version: 1.9.7
 
+      - name: Delete Terraform state files (if any)
+        run: |
+          rm -rf .terraform
+          rm -f terraform.tfstate terraform.tfstate.backup
+
       - name: Terraform Init
         run: terraform init
 
