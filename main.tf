@@ -3,7 +3,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "devops-rg"
+  name     = "azure-terraform-rg"
   location = "Canada Central"
 }
 
@@ -11,19 +11,21 @@ resource "azurerm_service_plan" "example" {
   name                = "example-appserviceplan"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
-  sku {
-    tier = "PremiumV3"
-    size = "P0v3"
-  }
+  os_type             = "Linux"                    # Required field for OS type
+  sku_name            = "P1v3"                     # Required SKU name, replace if you want a different size
+}
+
+resource "random_id" "suffix" {
+  byte_length = 4
 }
 
 resource "azurerm_app_service" "example" {
-  name                = "example-appservice"
+  name                = "example-appservice-${random_id.suffix.hex}" # Unique name
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
-  app_service_plan_id = azurerm_app_service_plan.example.id
+  app_service_plan_id = azurerm_service_plan.example.id             # Correct reference
 
   site_config {
-    # Add relevant site configurations here, e.g., stack settings
+    # Add any relevant site configurations here
   }
 }
