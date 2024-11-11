@@ -3,8 +3,8 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "resourceazures-rg"
-  location = "Canada Central"
+  name     = "syedpavan-rg"
+  location = "West Europe"
 }
 
 resource "azurerm_service_plan" "example" {
@@ -22,7 +22,6 @@ resource "azurerm_linux_web_app" "example" {
   service_plan_id     = azurerm_service_plan.example.id
 
   site_config {
-    linux_fx_version = "NODE|18"
     # Add any relevant site configurations here
   }
 }
