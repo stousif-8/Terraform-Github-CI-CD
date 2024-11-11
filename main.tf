@@ -3,7 +3,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "syedpavan-rg"
+  name     = "trigentazure-rg"
   location = "South India"
 }
 
