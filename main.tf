@@ -26,6 +26,7 @@ resource "azurerm_app_service" "example" {
   app_service_plan_id = azurerm_service_plan.example.id              # Correct reference to service plan
 
   site_config {
+    linux_fx_version = "NODE|16"
     # Add any relevant site configurations here
   }
 }
