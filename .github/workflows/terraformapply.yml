@@ -17,6 +17,9 @@ jobs:
         with:
           terraform_version: 1.9.7
 
+      - name: Set Terraform Debug Logging
+        run: echo "TF_LOG=DEBUG" >> $GITHUB_ENV
+
       - name: Delete Terraform state files (if any)
         run: |
           rm -rf .terraform
@@ -25,14 +28,6 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Refresh Terraform State
-        env:
-          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-        run: terraform refresh -auto-approve
-
       - name: Terraform Apply
         env:
           ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
@@ -40,3 +35,4 @@ jobs:
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         run: terraform apply -auto-approve
+
