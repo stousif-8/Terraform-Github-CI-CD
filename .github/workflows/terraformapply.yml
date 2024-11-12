@@ -17,14 +17,6 @@ jobs:
         with:
           terraform_version: 1.9.7
 
-      - name: Set Terraform Debug Logging
-        run: echo "TF_LOG=DEBUG" >> $GITHUB_ENV
-
-      - name: Delete Terraform state files (if any)
-        run: |
-          rm -rf .terraform
-          rm -f terraform.tfstate terraform.tfstate.backup
-
       - name: Terraform Init
         run: terraform init
 
