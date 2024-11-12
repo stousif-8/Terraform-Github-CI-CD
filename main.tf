@@ -3,8 +3,8 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "trigent-terraform-rg"
-  location = "South India"
+  name     = "trigent-devops-rg"
+  location = "West India"
 }
 
 resource "azurerm_service_plan" "example" {
